@@ -1,0 +1,516 @@
+{
+	"info": {
+		"_postman_id": "978c9b2c-edb6-45e0-88ea-81faaa14d25f",
+		"name": "GSITest Kanban API",
+		"description": "Colección de endpoints para la API Kanban de GSITest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27671645"
+	},
+	"item": [
+		{
+			"name": "Boards",
+			"item": [
+				{
+					"name": "Get All Boards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/boards/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"boards",
+								""
+							]
+						},
+						"description": "Obtiene todos los tableros disponibles"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Board by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/boards/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"boards",
+								"1"
+							]
+						},
+						"description": "Obtiene un tablero específico por su ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Board",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nuevo Proyecto\",\n    \"description\": \"Tablero para gestionar el nuevo proyecto\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/kanban/boards/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"boards",
+								""
+							]
+						},
+						"description": "Crea un nuevo tablero"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Board",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Proyecto Actualizado\",\n    \"description\": \"Descripción actualizada del proyecto\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/kanban/boards/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"boards",
+								"1"
+							]
+						},
+						"description": "Actualiza un tablero existente"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Board",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/boards/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"boards",
+								"1"
+							]
+						},
+						"description": "Elimina un tablero por su ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Operaciones relacionadas con los tableros Kanban"
+		},
+		{
+			"name": "Columns",
+			"item": [
+				{
+					"name": "Get Columns by Board ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/boards/1/columns/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"boards",
+								"1",
+								"columns",
+								""
+							]
+						},
+						"description": "Obtiene todas las columnas de un tablero específico"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Column",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Por hacer\",\n    \"order\": 0,\n    \"board_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/kanban/columns/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"columns",
+								""
+							]
+						},
+						"description": "Crea una nueva columna en un tablero"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Column",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"En progreso\",\n    \"order\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/kanban/columns/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"columns",
+								"1"
+							]
+						},
+						"description": "Actualiza una columna existente"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Column",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/columns/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"columns",
+								"1"
+							]
+						},
+						"description": "Elimina una columna por su ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Operaciones relacionadas con las columnas de los tableros Kanban"
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Get Tasks by Column",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/tasks?column_id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "column_id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Obtiene todas las tareas de una columna específica"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/tasks/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"tasks",
+								"all"
+							]
+						},
+						"description": "Obtiene todas las tareas de todas las columnas"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/tasks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"tasks",
+								"1"
+							]
+						},
+						"description": "Obtiene una tarea específica por su ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Implementar API\",\n    \"description\": \"Desarrollar los endpoints de la API REST\",\n    \"status\": \"todo\",\n    \"priority\": \"high\",\n    \"column_id\": 1,\n    \"due_date\": \"2025-06-01T00:00:00Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/kanban/tasks/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"tasks",
+								""
+							]
+						},
+						"description": "Crea una nueva tarea en una columna"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Implementar API v2\",\n    \"description\": \"Actualizar los endpoints existentes\",\n    \"status\": \"in_progress\",\n    \"priority\": \"urgent\",\n    \"column_id\": 2\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/kanban/tasks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"tasks",
+								"1"
+							]
+						},
+						"description": "Actualiza una tarea existente"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/tasks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"tasks",
+								"1"
+							]
+						},
+						"description": "Elimina una tarea por su ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Operaciones relacionadas con las tareas del tablero Kanban"
+		},
+		{
+			"name": "Tags",
+			"item": [
+				{
+					"name": "Get All Tags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/tags/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"tags",
+								""
+							]
+						},
+						"description": "Obtiene todas las etiquetas disponibles"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Tag",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Frontend\",\n    \"color\": \"#3498db\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/kanban/tags/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"tags",
+								""
+							]
+						},
+						"description": "Crea una nueva etiqueta"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Tag to Task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/tasks/1/tags/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"tasks",
+								"1",
+								"tags",
+								"1"
+							]
+						},
+						"description": "Agrega una etiqueta a una tarea"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Tag from Task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/kanban/tasks/1/tags/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"kanban",
+								"tasks",
+								"1",
+								"tags",
+								"1"
+							]
+						},
+						"description": "Elimina una etiqueta de una tarea"
+					},
+					"response": []
+				}
+			],
+			"description": "Operaciones relacionadas con las etiquetas de las tareas"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000/api/v1",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,43 @@
+FROM node:18-alpine AS frontend-builder
+
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend/ .
+RUN npm run build
+
+FROM python:3.10-slim
+
+# Instalar PostgreSQL
+RUN apt-get update && apt-get install -y postgresql postgresql-contrib && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Configurar PostgreSQL
+USER postgres
+RUN service postgresql start && \
+    psql --command "CREATE USER gsitest WITH PASSWORD 'test123';" && \
+    createdb -O gsitest gsitest && \
+    service postgresql stop
+
+USER root
+WORKDIR /app
+
+# Copiar y configurar el backend
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install pydantic-settings
+COPY backend/ .
+
+# Actualizar configuración de pydantic
+RUN sed -i 's/from pydantic import BaseSettings/from pydantic_settings import BaseSettings/' app/core/config.py
+
+# Copiar el frontend compilado
+COPY --from=frontend-builder /app/frontend/build /app/static
+
+# Script de inicio
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 8000
+ENTRYPOINT ["/entrypoint.sh"]
